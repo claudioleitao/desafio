@@ -1,5 +1,9 @@
 package br.com.flexpag.postomedicoveterinario.negocio;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import br.com.flexpag.postomedicoveterinario.entidade.MedicoVeterinario;
 import br.com.flexpag.postomedicoveterinario.repositorio.IRepositorioMedicoVeterinario;
 
 public class CadastroMedicoVeterinario {
@@ -9,23 +13,23 @@ public class CadastroMedicoVeterinario {
 		this.repMedicoVeterinario = repMedicoVeterinario;
 	}
 	
-	public void incluir() {
-		this.repMedicoVeterinario.incluir();
+	public void incluir(MedicoVeterinario novoMedicoVeterinario) throws ClassNotFoundException, IOException, Exception {
+		this.repMedicoVeterinario.incluir(novoMedicoVeterinario);
 	}
 	
-	public void alterar() {
-		this.repMedicoVeterinario.alterar();
+	public void alterar(MedicoVeterinario altMedicoVeterinario) throws ClassNotFoundException, IOException, Exception {
+		this.repMedicoVeterinario.alterar(altMedicoVeterinario);
 	}
 	
-	public void consultar() {
-		this.repMedicoVeterinario.consultar();
+	public MedicoVeterinario consultar(String nome) throws ClassNotFoundException, IOException, Exception {
+		return this.repMedicoVeterinario.consultar(nome);
 	}
 	
-	public void listar() {
-		this.repMedicoVeterinario.listar();
+	public ArrayList<MedicoVeterinario> listar() throws ClassNotFoundException, IOException, Exception {
+		return this.repMedicoVeterinario.listar();
 	}
 	
-	public void excluir() {
-		this.repMedicoVeterinario.excluir();
+	public void excluir(int id) throws ClassNotFoundException, IOException, Exception {
+		this.repMedicoVeterinario.excluir(id);
 	}
 }

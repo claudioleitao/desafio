@@ -1,5 +1,13 @@
 package br.com.flexpag.postomedicoveterinario.negocio;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import br.com.flexpag.postomedicoveterinario.entidade.Atendimento;
+import br.com.flexpag.postomedicoveterinario.entidade.Cachorro;
+import br.com.flexpag.postomedicoveterinario.entidade.Gato;
+import br.com.flexpag.postomedicoveterinario.entidade.Hamster;
+import br.com.flexpag.postomedicoveterinario.entidade.MedicoVeterinario;
 import br.com.flexpag.postomedicoveterinario.repositorio.IRepositorioAnimal;
 import br.com.flexpag.postomedicoveterinario.repositorio.IRepositorioAtendimento;
 import br.com.flexpag.postomedicoveterinario.repositorio.IRepositorioMedicoVeterinario;
@@ -37,63 +45,71 @@ public class Fachada {
 		this.cadAtendimento = new CadastroAtendimento(repAtendimento);
 	}
 	
-	public void incluirAnimal() {
-		this.cadAnimal.incluir();
+	public void incluirAnimal(String nome, String sexo, String especie, String raca) throws ClassNotFoundException, IOException, Exception {
+		if (especie.equalsIgnoreCase("Cachorro")) {
+			this.cadAnimal.incluir(new Cachorro(0, nome, sexo, raca));
+		} else if (especie.equalsIgnoreCase("Gato")) {
+			this.cadAnimal.incluir(new Gato(0, nome, sexo, raca));
+		} else if (especie.equalsIgnoreCase("Hamster")) {
+			this.cadAnimal.incluir(new Hamster(0, nome, sexo, raca));
+		}
 	}
 	
-	public void alterarAnimal() {
-		this.cadAnimal.alterar();
+	public void alterarAnimal(String nome, String sexo, String especie, String raca) throws ClassNotFoundException, IOException, Exception {
+		if (especie.equalsIgnoreCase("Cachorro")) {
+			this.cadAnimal.alterar(new Cachorro(0, nome, sexo, raca));
+		} else if (especie.equalsIgnoreCase("Gato")) {
+			this.cadAnimal.alterar(new Gato(0, nome, sexo, raca));
+		} else if (especie.equalsIgnoreCase("Hamster")) {
+			this.cadAnimal.alterar(new Hamster(0, nome, sexo, raca));
+		}
 	}
 	
-	public void consultarAnimal() {
-		this.cadAnimal.consultar();
+	public Object consultarAnimal(String nome) throws ClassNotFoundException, IOException, Exception {
+		return this.cadAnimal.consultar(nome);
 	}
 	
-	public void listarAnimal() {
-		this.cadAnimal.listar();
+	public ArrayList<Object> listarAnimal() throws ClassNotFoundException, IOException, Exception {
+		return this.cadAnimal.listar();
 	}
 	
-	public void excluirAnimal() {
-		this.cadAnimal.excluir();
+	public void excluirAnimal(int id) throws ClassNotFoundException, IOException, Exception {
+		this.cadAnimal.excluir(id);
 	}
 	
-	public void incluirMedicoVeterinario() {
-		this.cadMedicoVeterinario.incluir();
+	public void incluirMedicoVeterinario(MedicoVeterinario novoMedicoVeterinario) throws ClassNotFoundException, IOException, Exception {
+		this.cadMedicoVeterinario.incluir(novoMedicoVeterinario);
 	}
 	
-	public void alterarMedicoVeterinario() {
-		this.cadMedicoVeterinario.alterar();
+	public void alterarMedicoVeterinario(MedicoVeterinario altMedicoVeterinario) throws ClassNotFoundException, IOException, Exception {
+		this.cadMedicoVeterinario.alterar(altMedicoVeterinario);
 	}
 	
-	public void consultarMedicoVeterinario() {
-		this.cadMedicoVeterinario.consultar();
+	public MedicoVeterinario consultarMedicoVeterinario(String nome) throws ClassNotFoundException, IOException, Exception {
+		return this.cadMedicoVeterinario.consultar(nome);
 	}
 	
-	public void listarMedicoVeterinario() {
-		this.cadMedicoVeterinario.listar();
+	public ArrayList<MedicoVeterinario> listarMedicoVeterinario() throws ClassNotFoundException, IOException, Exception {
+		return this.cadMedicoVeterinario.listar();
 	}
 	
-	public void excluirMedicoVeterinario() {
-		this.cadMedicoVeterinario.excluir();
+	public void excluirMedicoVeterinario(int id) throws ClassNotFoundException, IOException, Exception {
+		this.cadMedicoVeterinario.excluir(id);
 	}
 	
-	public void incluirAtendimento() {
-		this.cadAtendimento.incluir();
+	public void incluirAtendimento(Atendimento novoAtendimento) throws ClassNotFoundException, IOException, Exception {
+		this.cadAtendimento.incluir(novoAtendimento);
 	}
 	
-	public void alterarAtendimento() {
-		this.cadAtendimento.alterar();
+	public void alterarAtendimento(Atendimento altAtendimento) throws ClassNotFoundException, IOException, Exception {
+		this.cadAtendimento.alterar(altAtendimento);
 	}
 	
-	public void consultarAtendimento() {
-		this.cadAtendimento.consultar();
+	public ArrayList<Atendimento> listarAtendimento() throws ClassNotFoundException, IOException, Exception {
+		return this.cadAtendimento.listar();
 	}
 	
-	public void listarAtendimento() {
-		this.cadAtendimento.listar();
-	}
-	
-	public void excluirAtendimento() {
-		this.cadAtendimento.excluir();
+	public void excluirAtendimento(int id) throws ClassNotFoundException, IOException, Exception {
+		this.cadAtendimento.excluir(id);
 	}
 }

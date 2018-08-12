@@ -1,5 +1,8 @@
 package br.com.flexpag.postomedicoveterinario.negocio;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import br.com.flexpag.postomedicoveterinario.repositorio.IRepositorioAnimal;
 
 public class CadastroAnimal {
@@ -9,23 +12,23 @@ public class CadastroAnimal {
 		this.repAnimal = repAnimal;
 	}
 	
-	public void incluir() {
-		this.repAnimal.incluir();
+	public void incluir(Object novoAnimal) throws ClassNotFoundException, IOException, Exception {
+		this.repAnimal.incluir(novoAnimal);
 	}
 	
-	public void alterar() {
-		this.repAnimal.alterar();
+	public void alterar(Object altAnimal) throws ClassNotFoundException, IOException, Exception {
+		this.repAnimal.alterar(altAnimal);
 	}
 	
-	public void consultar() {
-		this.repAnimal.consultar();
+	public Object consultar(String nome) throws ClassNotFoundException, IOException, Exception {
+		return this.repAnimal.consultar(nome);
 	}
 	
-	public void listar() {
-		this.repAnimal.listar();
+	public ArrayList<Object> listar() throws ClassNotFoundException, IOException, Exception {
+		return this.repAnimal.listar();
 	}
 	
-	public void excluir() {
-		this.repAnimal.excluir();
+	public void excluir(int id) throws ClassNotFoundException, IOException, Exception {
+		this.repAnimal.excluir(id);
 	}
 }
