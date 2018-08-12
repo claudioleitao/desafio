@@ -17,21 +17,21 @@ import br.com.flexpag.postomedicoveterinario.repositorio.RepositorioMedicoVeteri
 
 public class Fachada {
 	private FabricaRepositorio fabrica;
-	private Fachada instancia;
+	private static Fachada instancia;
 	
 	private CadastroAnimal cadAnimal;
 	private CadastroMedicoVeterinario cadMedicoVeterinario;
 	private CadastroAtendimento cadAtendimento;
 	
 	private Fachada() {
-		
+		this.iniciarCadastro();
 	}
 	
-	public Fachada getInstance() {
-		if (this.instancia == null)
-			this.instancia = new Fachada();
+	public static Fachada getInstance() {
+		if (instancia == null)
+			instancia = new Fachada();
 		
-		return this.instancia;
+		return instancia;
 	}
 	
 	public void iniciarCadastro() {
@@ -69,6 +69,10 @@ public class Fachada {
 		return this.cadAnimal.consultar(nome);
 	}
 	
+	public Object consultarAnimal(int id) throws ClassNotFoundException, IOException, Exception {
+		return this.cadAnimal.consultar(id);
+	}
+	
 	public ArrayList<Object> listarAnimal() throws ClassNotFoundException, IOException, Exception {
 		return this.cadAnimal.listar();
 	}
@@ -87,6 +91,10 @@ public class Fachada {
 	
 	public MedicoVeterinario consultarMedicoVeterinario(String nome) throws ClassNotFoundException, IOException, Exception {
 		return this.cadMedicoVeterinario.consultar(nome);
+	}
+	
+	public MedicoVeterinario consultarMedicoVeterinario(int id) throws ClassNotFoundException, IOException, Exception {
+		return this.cadMedicoVeterinario.consultar(id);
 	}
 	
 	public ArrayList<MedicoVeterinario> listarMedicoVeterinario() throws ClassNotFoundException, IOException, Exception {

@@ -78,6 +78,27 @@ public class RepositorioMedicoVeterinario implements IRepositorioMedicoVeterinar
 		return null;
 	}
 	
+	public MedicoVeterinario consultar(int id) throws ClassNotFoundException, IOException, Exception {
+		String query = "select id, nome, sexo, especialidade from medicoveterinario where id = '"+id+"'";
+
+		Connection conn = banco.conectar();
+		Statement stm = (Statement) conn.createStatement();
+		ResultSet rs = stm.executeQuery(query);
+	
+		while (rs.next()) {
+			int idMedico = rs.getInt("id");
+			String nome1 = rs.getString("nome");
+			String sexo = rs.getString("sexo");
+			String especialidade = rs.getString("especialidade");
+		
+			conn = banco.desconectar();
+			
+			return new MedicoVeterinario(idMedico, nome1, sexo, especialidade);
+		}
+	
+		return null;
+	}
+	
 	public ArrayList<MedicoVeterinario> listar() throws ClassNotFoundException, IOException, Exception {
 		ArrayList<MedicoVeterinario> listMedicoVeterinario = new ArrayList<MedicoVeterinario>();
 		

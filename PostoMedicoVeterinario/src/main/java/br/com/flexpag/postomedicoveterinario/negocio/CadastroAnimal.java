@@ -24,6 +24,10 @@ public class CadastroAnimal {
 		return this.repAnimal.consultar(nome);
 	}
 	
+	public Object consultar(int id) throws ClassNotFoundException, IOException, Exception {
+		return this.repAnimal.consultar(id);
+	}
+	
 	public ArrayList<Object> listar() throws ClassNotFoundException, IOException, Exception {
 		return this.repAnimal.listar();
 	}

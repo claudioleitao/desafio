@@ -25,6 +25,10 @@ public class CadastroMedicoVeterinario {
 		return this.repMedicoVeterinario.consultar(nome);
 	}
 	
+	public MedicoVeterinario consultar(int id) throws ClassNotFoundException, IOException, Exception {
+		return this.repMedicoVeterinario.consultar(id);
+	}
+	
 	public ArrayList<MedicoVeterinario> listar() throws ClassNotFoundException, IOException, Exception {
 		return this.repMedicoVeterinario.listar();
 	}

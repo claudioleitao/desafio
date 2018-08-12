@@ -137,6 +137,37 @@ public class RepositorioAnimal implements IRepositorioAnimal {
 		return null;
 	}
 	
+	public Object consultar(int id) throws ClassNotFoundException, IOException, Exception {
+		String query = "select id, nomeAnimal, sexo, especie, raca from animal where id = '"+id+"'";
+
+		Connection conn = banco.conectar();
+		Statement stm = (Statement) conn.createStatement();
+		ResultSet rs = stm.executeQuery(query);
+	
+		while (rs.next()) {
+			int idAnimal = rs.getInt("id");
+			String nomeAnimal = rs.getString("nomeAnimal");
+			String sexo = rs.getString("sexo");
+			String especie = rs.getString("especie");
+			String raca = rs.getString("raca");
+		
+			conn = banco.desconectar();
+			
+			if (especie.equalsIgnoreCase("Cachorro")) {
+				Cachorro cachorro = new Cachorro(idAnimal, nomeAnimal, sexo, raca);
+				return cachorro;
+			} else if (especie.equalsIgnoreCase("Gato")) {
+				Gato gato = new Gato(idAnimal, nomeAnimal, sexo, raca);
+				return gato;
+			} else if (especie.equalsIgnoreCase("Hamster")) {
+				Hamster hamster = new Hamster(idAnimal, nomeAnimal, sexo, raca);
+				return hamster;
+			}
+		}
+	
+		return null;
+	}
+	
 	public ArrayList<Object> listar() throws ClassNotFoundException, IOException, Exception {
 		ArrayList<Object> listObjects = new ArrayList<Object>();
 		
