@@ -1,7 +1,5 @@
 Manifest-Version: 1.0
 Built-By: amiga
 Build-Jdk: 10.0.2
-Main-Class: br.com.flexpag.postomedicoveterinario.apresentacao.TelaPri
- ncipal
 Created-By: Maven Integration for Eclipse
 

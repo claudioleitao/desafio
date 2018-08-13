@@ -27,19 +27,19 @@ public class RepositorioAnimal implements IRepositorioAnimal {
 		String especie = "";
 		String raca = "";
 		
-		if (novoAnimal.getClass().toString().equalsIgnoreCase("Cachorro")) {
+		if (novoAnimal.getClass() == Cachorro.class) {
 			Cachorro cachorro = (Cachorro) novoAnimal;
 			nomeAnimal = cachorro.getNome();
 			sexo = cachorro.getSexo();
 			especie = "Cachorro";
 			raca = cachorro.getRaca();
-		} else if (novoAnimal.getClass().toString().equalsIgnoreCase("Gato")) {
+		} else if (novoAnimal.getClass() == Gato.class) {
 			Gato gato = (Gato) novoAnimal;
 			nomeAnimal = gato.getNome();
 			sexo = gato.getSexo();
 			especie = "Gato";
 			raca = gato.getRaca();
-		} else  if (novoAnimal.getClass().toString().equalsIgnoreCase("Hamster")) {
+		} else  if (novoAnimal.getClass() == Hamster.class) {
 			Hamster hamster = (Hamster) novoAnimal;
 			nomeAnimal = hamster.getNome();
 			sexo = hamster.getSexo();
@@ -48,7 +48,7 @@ public class RepositorioAnimal implements IRepositorioAnimal {
 		}
 		
 		Connection conn = banco.conectar();
-		String query = "insert into animal (nomeAnimal, sexo, especie, raca) values(?, ?, ?, ?)";
+		String query = "insert into animal (nome, sexo, especie, raca) values(?, ?, ?, ?)";
 		
 		PreparedStatement statement = conn.prepareStatement(query);
 		statement.setString(1, nomeAnimal);
@@ -68,21 +68,21 @@ public class RepositorioAnimal implements IRepositorioAnimal {
 		String especie = "";
 		String raca = "";
 		
-		if (altAnimal.getClass().toString().equalsIgnoreCase("Cachorro")) {
+		if (altAnimal.getClass() == Cachorro.class) {
 			Cachorro cachorro = (Cachorro) altAnimal;
 			id = cachorro.getId();
 			nomeAnimal = cachorro.getNome();
 			sexo = cachorro.getSexo();
 			especie = "Cachorro";
 			raca = cachorro.getRaca();
-		} else if (altAnimal.getClass().toString().equalsIgnoreCase("Gato")) {
+		} else if (altAnimal.getClass() == Gato.class) {
 			Gato gato = (Gato) altAnimal;
 			id = gato.getId();
 			nomeAnimal = gato.getNome();
 			sexo = gato.getSexo();
 			especie = "Gato";
 			raca = gato.getRaca();
-		} else  if (altAnimal.getClass().toString().equalsIgnoreCase("Hamster")) {
+		} else if (altAnimal.getClass() == Hamster.class) {
 			Hamster hamster = (Hamster) altAnimal;
 			id = hamster.getId();
 			nomeAnimal = hamster.getNome();
@@ -92,7 +92,7 @@ public class RepositorioAnimal implements IRepositorioAnimal {
 		}
 		
 		Connection conn = banco.conectar();
-		String query = "update animal set nomeAnimal = ?, sexo = ?, especie = ?, raca = ? where id = ?";
+		String query = "update animal set nome = ?, sexo = ?, especie = ?, raca = ? where id = ?";
 		
 		PreparedStatement statement = conn.prepareStatement(query);
 		statement.setString(1, nomeAnimal);
@@ -107,7 +107,7 @@ public class RepositorioAnimal implements IRepositorioAnimal {
 	}
 	
 	public Object consultar(String nome) throws ClassNotFoundException, IOException, Exception {
-		String query = "select id, nomeAnimal, sexo, especie, raca from animal where nomeAnimal = '"+nome+"'";
+		String query = "select id, nome, sexo, especie, raca from animal where nome = '"+nome+"'";
 
 		Connection conn = banco.conectar();
 		Statement stm = (Statement) conn.createStatement();
@@ -115,7 +115,7 @@ public class RepositorioAnimal implements IRepositorioAnimal {
 	
 		while (rs.next()) {
 			int id = rs.getInt("id");
-			String nomeAnimal = rs.getString("nomeAnimal");
+			String nomeAnimal = rs.getString("nome");
 			String sexo = rs.getString("sexo");
 			String especie = rs.getString("especie");
 			String raca = rs.getString("raca");
@@ -138,7 +138,7 @@ public class RepositorioAnimal implements IRepositorioAnimal {
 	}
 	
 	public Object consultar(int id) throws ClassNotFoundException, IOException, Exception {
-		String query = "select id, nomeAnimal, sexo, especie, raca from animal where id = '"+id+"'";
+		String query = "select id, nome, sexo, especie, raca from animal where id = '"+id+"'";
 
 		Connection conn = banco.conectar();
 		Statement stm = (Statement) conn.createStatement();
@@ -146,7 +146,7 @@ public class RepositorioAnimal implements IRepositorioAnimal {
 	
 		while (rs.next()) {
 			int idAnimal = rs.getInt("id");
-			String nomeAnimal = rs.getString("nomeAnimal");
+			String nomeAnimal = rs.getString("nome");
 			String sexo = rs.getString("sexo");
 			String especie = rs.getString("especie");
 			String raca = rs.getString("raca");
@@ -171,7 +171,7 @@ public class RepositorioAnimal implements IRepositorioAnimal {
 	public ArrayList<Object> listar() throws ClassNotFoundException, IOException, Exception {
 		ArrayList<Object> listObjects = new ArrayList<Object>();
 		
-		String query = "select id, nomeAnimal, sexo, especie, raca from animal";
+		String query = "select id, nome, sexo, especie, raca from animal";
 
 		Connection conn = banco.conectar();
 		Statement stm = (Statement) conn.createStatement();
@@ -179,7 +179,7 @@ public class RepositorioAnimal implements IRepositorioAnimal {
 	
 		while (rs.next()) {
 			int id = rs.getInt("id");
-			String nomeAnimal = rs.getString("nomeAnimal");
+			String nomeAnimal = rs.getString("nome");
 			String sexo = rs.getString("sexo");
 			String especie = rs.getString("especie");
 			String raca = rs.getString("raca");

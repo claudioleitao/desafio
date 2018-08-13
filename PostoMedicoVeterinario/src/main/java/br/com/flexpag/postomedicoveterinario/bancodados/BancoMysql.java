@@ -9,7 +9,7 @@ public class BancoMysql {
 	
 	public Connection conectar() throws ClassNotFoundException, SQLException {
 		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/postosaude?characterEncoding=UTF8";
+		String url = "jdbc:mysql://localhost:3306/postomedicoveterinario?characterEncoding=UTF8";
 		String user = "admin";
 		String pass = "123456789";
 

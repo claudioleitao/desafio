@@ -81,7 +81,8 @@ public class Fachada {
 		this.cadAnimal.excluir(id);
 	}
 	
-	public void incluirMedicoVeterinario(MedicoVeterinario novoMedicoVeterinario) throws ClassNotFoundException, IOException, Exception {
+	public void incluirMedicoVeterinario(String nome, String sexo, String especialidade) throws ClassNotFoundException, IOException, Exception {
+		MedicoVeterinario novoMedicoVeterinario = new MedicoVeterinario(0, nome, sexo, especialidade);
 		this.cadMedicoVeterinario.incluir(novoMedicoVeterinario);
 	}
 	
@@ -105,7 +106,8 @@ public class Fachada {
 		this.cadMedicoVeterinario.excluir(id);
 	}
 	
-	public void incluirAtendimento(Atendimento novoAtendimento) throws ClassNotFoundException, IOException, Exception {
+	public void incluirAtendimento(int idMedicoVeterinario, int idAnimal, boolean urgencia) throws ClassNotFoundException, IOException, Exception {
+		Atendimento novoAtendimento = new Atendimento(0, idMedicoVeterinario, idAnimal, urgencia);
 		this.cadAtendimento.incluir(novoAtendimento);
 	}
 	
