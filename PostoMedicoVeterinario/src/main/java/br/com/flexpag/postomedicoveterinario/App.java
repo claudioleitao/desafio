@@ -75,6 +75,7 @@ public class App {
 		get("/incluircadastroanimal", (req, res) -> incluirCadastroAnimal());
 		get("/incluircadastroatendimento", (req, res) -> incluirCadastroAtendimento());
 		get("/incluircadastroveterinario", (req, res) -> incluirCadastroVeterinario());
+		
 		post("/incluircadastroatendimento", (req, res) -> {
 			return incluirAtendimento(req, res, fachada);
 		});
@@ -87,6 +88,8 @@ public class App {
 	}
 
 	public static String incluirAtendimento(Request req, Response res, Fachada fachada) {
+		String values = "";
+		
 		try {
 			String nomeAnimal = req.queryParams("txt_nomeanimal");
 			String nomeVeterinario = req.queryParams("txt_nomeveterinario");
@@ -114,10 +117,18 @@ public class App {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "/incluircadastroatendimento";
+		
+		values = values+"Inclusão do Veterinário com sucesso";
+		values = values+"<form action=\"/retornarcadastro\" method=\"GET\">";
+		values = values+"<input type=\"submit\" value=\"Voltar\">";
+		values = values+"</form>";
+		
+		return values;
 	}
 
 	public static String incluirVeterinario(Request req, Response res, Fachada fachada) {
+		String values = "";
+		
 		try {
 			String nome = req.queryParams("txt_nomeveterinario");
 			String sexo = req.queryParams("txt_sexo");
@@ -134,10 +145,18 @@ public class App {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "/incluircadastroveterinario";
+		
+		values = values+"Inclusão do Veterinário com sucesso";
+		values = values+"<form action=\"/retornarcadastro\" method=\"GET\">";
+		values = values+"<input type=\"submit\" value=\"Voltar\">";
+		values = values+"</form>";
+		
+		return values;
 	}
 
 	public static String incluirAnimal(Request req, Response res, Fachada fachada) {
+		String values = "";
+		
 		try {
 			String nome = req.queryParams("txt_nomeanimal");
 			String sexo = req.queryParams("txt_sexo");
@@ -155,7 +174,13 @@ public class App {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "/incluircadastroanimal";
+		
+		values = values+"Inclusão do animal com sucesso";
+		values = values+"<form action=\"/retornarcadastro\" method=\"GET\">";
+		values = values+"<input type=\"submit\" value=\"Voltar\">";
+		values = values+"</form>";
+		
+		return values;
 	}
 
 	public static final String incluirCadastroAnimal() {
