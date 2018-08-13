@@ -70,7 +70,7 @@ public class App {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		get("/retornarcadastro", (req, res) -> retornarCadastro());
 		get("/incluircadastroanimal", (req, res) -> incluirCadastroAnimal());
 		get("/incluircadastroatendimento", (req, res) -> incluirCadastroAtendimento());
