@@ -3,25 +3,22 @@ package br.com.flexpag.postomedicoveterinario.negocio;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import br.com.flexpag.postomedicoveterinario.entidade.Atendimento;
+import br.com.flexpag.postomedicoveterinario.AppTelas;
+import br.com.flexpag.postomedicoveterinario.entidade.Animal;
 import br.com.flexpag.postomedicoveterinario.entidade.Cachorro;
 import br.com.flexpag.postomedicoveterinario.entidade.Gato;
 import br.com.flexpag.postomedicoveterinario.entidade.Hamster;
+import br.com.flexpag.postomedicoveterinario.entidade.Lagarto;
 import br.com.flexpag.postomedicoveterinario.entidade.MedicoVeterinario;
-import br.com.flexpag.postomedicoveterinario.repositorio.IRepositorioAnimal;
-import br.com.flexpag.postomedicoveterinario.repositorio.IRepositorioAtendimento;
-import br.com.flexpag.postomedicoveterinario.repositorio.IRepositorioMedicoVeterinario;
-import br.com.flexpag.postomedicoveterinario.repositorio.RepositorioAnimal;
-import br.com.flexpag.postomedicoveterinario.repositorio.RepositorioAtendimento;
-import br.com.flexpag.postomedicoveterinario.repositorio.RepositorioMedicoVeterinario;
+import br.com.flexpag.postomedicoveterinario.entidade.Pessoa;
+import br.com.flexpag.postomedicoveterinario.repositorio.IRepositorio;
+import br.com.flexpag.postomedicoveterinario.repositorio.Repositorio;
 
 public class Fachada {
 	private FabricaRepositorio fabrica;
 	private static Fachada instancia;
 	
-	private CadastroAnimal cadAnimal;
-	private CadastroMedicoVeterinario cadMedicoVeterinario;
-	private CadastroAtendimento cadAtendimento;
+	private CRUD<Pessoa, Animal> cadastro;
 	
 	private Fachada() {
 		this.iniciarCadastro();
@@ -36,90 +33,47 @@ public class Fachada {
 	
 	public void iniciarCadastro() {
 		this.fabrica = new FabricaRepositorio();
-		IRepositorioAnimal repAnimal = (RepositorioAnimal) fabrica.criarRepositorioAnimal();
-		IRepositorioMedicoVeterinario repMedicoVeterinario = (RepositorioMedicoVeterinario) fabrica.criarRepositorioMedicoVeterinario();
-		IRepositorioAtendimento repAtendimento = (RepositorioAtendimento) fabrica.criarRepositorioAtendimento();
+		IRepositorio<Pessoa, Animal> repCadastro = (Repositorio<Pessoa, Animal>) fabrica.criarRepositorio();
 		
-		this.cadAnimal = new CadastroAnimal(repAnimal);
-		this.cadMedicoVeterinario = new CadastroMedicoVeterinario(repMedicoVeterinario);
-		this.cadAtendimento = new CadastroAtendimento(repAtendimento);
+		this.cadastro = new CRUD<Pessoa, Animal>(repCadastro);
 	}
 	
-	public void incluirAnimal(String nome, String sexo, String especie, String raca) throws ClassNotFoundException, IOException, Exception {
-		if (especie.equalsIgnoreCase("Cachorro")) {
-			this.cadAnimal.incluir(new Cachorro(0, nome, sexo, raca));
-		} else if (especie.equalsIgnoreCase("Gato")) {
-			this.cadAnimal.incluir(new Gato(0, nome, sexo, raca));
-		} else if (especie.equalsIgnoreCase("Hamster")) {
-			this.cadAnimal.incluir(new Hamster(0, nome, sexo, raca));
-		}
+	public void addAnimal(String nome, String especie, String raca, boolean urgencia, String necessita) throws ClassNotFoundException, IOException {
+		Animal animal = dadosAnimal(nome, especie, raca, urgencia, necessita);
+		this.cadastro.add(null, animal);
 	}
 	
-	public void alterarAnimal(String nome, String sexo, String especie, String raca) throws ClassNotFoundException, IOException, Exception {
-		if (especie.equalsIgnoreCase("Cachorro")) {
-			this.cadAnimal.alterar(new Cachorro(0, nome, sexo, raca));
-		} else if (especie.equalsIgnoreCase("Gato")) {
-			this.cadAnimal.alterar(new Gato(0, nome, sexo, raca));
-		} else if (especie.equalsIgnoreCase("Hamster")) {
-			this.cadAnimal.alterar(new Hamster(0, nome, sexo, raca));
-		}
+	public void addVeterinario(String nome, String especialidade) throws ClassNotFoundException, IOException {
+		Pessoa veterinario = new MedicoVeterinario(0, nome, especialidade);
+		this.cadastro.add(veterinario, null);
 	}
 	
-	public Object consultarAnimal(String nome) throws ClassNotFoundException, IOException, Exception {
-		return this.cadAnimal.consultar(nome);
+	public void updateVeterinario(String nome, String especialidade) {
+		Pessoa veterinario = new MedicoVeterinario(0, nome, especialidade);
+		this.cadastro.update(veterinario);
 	}
 	
-	public Object consultarAnimal(int id) throws ClassNotFoundException, IOException, Exception {
-		return this.cadAnimal.consultar(id);
+	public void removeVeterinario(String nome, String especialidade) {
+		Pessoa veterinario = new MedicoVeterinario(0, nome, especialidade);
+		this.cadastro.remove(veterinario);
 	}
 	
-	public ArrayList<Object> listarAnimal() throws ClassNotFoundException, IOException, Exception {
-		return this.cadAnimal.listar();
+	public ArrayList<Pessoa> getMedico() {
+		return this.cadastro.get();
 	}
 	
-	public void excluirAnimal(int id) throws ClassNotFoundException, IOException, Exception {
-		this.cadAnimal.excluir(id);
-	}
-	
-	public void incluirMedicoVeterinario(String nome, String sexo, String especialidade) throws ClassNotFoundException, IOException, Exception {
-		MedicoVeterinario novoMedicoVeterinario = new MedicoVeterinario(0, nome, sexo, especialidade);
-		this.cadMedicoVeterinario.incluir(novoMedicoVeterinario);
-	}
-	
-	public void alterarMedicoVeterinario(MedicoVeterinario altMedicoVeterinario) throws ClassNotFoundException, IOException, Exception {
-		this.cadMedicoVeterinario.alterar(altMedicoVeterinario);
-	}
-	
-	public MedicoVeterinario consultarMedicoVeterinario(String nome) throws ClassNotFoundException, IOException, Exception {
-		return this.cadMedicoVeterinario.consultar(nome);
-	}
-	
-	public MedicoVeterinario consultarMedicoVeterinario(int id) throws ClassNotFoundException, IOException, Exception {
-		return this.cadMedicoVeterinario.consultar(id);
-	}
-	
-	public ArrayList<MedicoVeterinario> listarMedicoVeterinario() throws ClassNotFoundException, IOException, Exception {
-		return this.cadMedicoVeterinario.listar();
-	}
-	
-	public void excluirMedicoVeterinario(int id) throws ClassNotFoundException, IOException, Exception {
-		this.cadMedicoVeterinario.excluir(id);
-	}
-	
-	public void incluirAtendimento(int idMedicoVeterinario, int idAnimal, boolean urgencia) throws ClassNotFoundException, IOException, Exception {
-		Atendimento novoAtendimento = new Atendimento(0, idMedicoVeterinario, idAnimal, urgencia);
-		this.cadAtendimento.incluir(novoAtendimento);
-	}
-	
-	public void alterarAtendimento(Atendimento altAtendimento) throws ClassNotFoundException, IOException, Exception {
-		this.cadAtendimento.alterar(altAtendimento);
-	}
-	
-	public ArrayList<Atendimento> listarAtendimento() throws ClassNotFoundException, IOException, Exception {
-		return this.cadAtendimento.listar();
-	}
-	
-	public void excluirAtendimento(int id) throws ClassNotFoundException, IOException, Exception {
-		this.cadAtendimento.excluir(id);
+	private Animal dadosAnimal(String nome, String especie, String raca, boolean urgencia, String necessita) {
+		Animal animal = null;
+		
+		if (especie.equalsIgnoreCase("Cachorro"))
+			animal = new Cachorro(0, nome, especie, raca, urgencia, necessita);
+		else if (especie.equalsIgnoreCase("Gato"))
+			animal = new Gato(0, nome, especie, raca, urgencia, necessita);
+		else if (especie.equalsIgnoreCase("Hamster"))
+			animal = new Hamster(0, nome, especie, raca, urgencia, necessita);
+		else if (especie.equalsIgnoreCase("Lagarto"))
+			animal = new Lagarto(0, nome, especie, raca, urgencia, necessita);
+		
+		return animal;
 	}
 }

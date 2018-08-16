@@ -1,11 +1,10 @@
 package br.com.flexpag.postomedicoveterinario.entidade;
 
-public class Gato extends Animal {
-	public Gato() { super(); }
+public class Lagarto extends Animal {
+	public Lagarto() {super();}
 	
-	public Gato(int id, String nome, String especie, String raca, boolean urgencia, String necessita) {
+	public Lagarto (int id, String nome, String especie, String raca, boolean urgencia, String necessita) {
 		super(id, nome, especie, raca, urgencia, necessita);
-		this.raca = raca;
 	}
 	
 	@Override

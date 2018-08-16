@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="backend/src/main/java"/>
+	<classpathentry kind="src" path="backend/src/test/java"/>
+	<classpathentry kind="src" path="PostoMedicoVeterinario/src/main/java"/>
+	<classpathentry kind="src" path="PostoMedicoVeterinario/src/test/java"/>
+	<classpathentry kind="lib" path="backend/bibliotecas/com.mysql.jdbc_5.1.5.jar"/>
+	<classpathentry kind="lib" path="backend/bibliotecas/mysql-connector-java-5.1.23-bin.jar"/>
+	<classpathentry kind="lib" path="backend/target/PostoMedicoVeterinario-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="PostoMedicoVeterinario/bibliotecas/com.mysql.jdbc_5.1.5.jar"/>
+	<classpathentry kind="lib" path="PostoMedicoVeterinario/bibliotecas/mysql-connector-java-5.1.23-bin.jar"/>
+	<classpathentry kind="lib" path="PostoMedicoVeterinario/target/PostoMedicoVeterinario-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="output" path="PostoMedicoVeterinario/target/classes"/>
+</classpath>
